@@ -1,0 +1,5 @@
+#do not track
+keys.js
+node_modules
+.DS_Store 
+.env
