@@ -10,47 +10,71 @@ var keys = require("./keys.js");
 //API request to Spotify
 var Spotify = require("node-spotify-api");
 
+//use moment for MM/DD/YYYY
+//var moment = require("moment");
+
 //Access my key information 
 var spotify = new Spotify(keys.spotify);
 
 // store the arguments in the array
-var nodeArgs = process.argv;
-
-//create a variable to hold the artis name (arg: Name of venue, Location, Date of event (use moment to format this as MM/DD/YYYY))
-var artist = "";
+// var nodeArgs = process.argv;
 
 //create a variable to hold song name (arg: Artist, Song, Album, Preview Link)
-var songs = "";
+//var songs = "";
 
 //create an empty variable for holding the movie name
-var movieName = "";
+//var movieName = "";
+
+//create a variable to hold the artis name (arg: Name of venue, Location, Date of event (use moment to format this as MM/DD/YYYY))
+var artistName = function(artist) {
+    return artist.name;
+}
 
 //take user input for song title
-var mySong = function(songTitle) {
+var mySong = function(songName) {
 	//if no song is provided, default to "The Sign" by Ace of Base.
-	if(songTitle == null )
-		value = "The Sign";
-	// console.log('title: ' + 'The Sign');
+	// if(songName == null )
+	// 	value = "The Sign";
+	//  console.log('title: ' + 'The Sign');
 
 //search song and get song data
-	spotify.search({ type: 'track', query: songTitle }, 
+	spotify.search({ type: 'track', query: songName }, 
 	function(err, data) {
 		if (err) {
-			return console.log('Error occured: ' + err); 
+			 console.log('Error occured: ' + err); 
+			 return;
 		} 
-		console.log(data.tracks.items[0]);	
-	var getData = data.tracks.items;
+			console.log(data.tracks.items[0]);
+	
+	
+	var getSong = data.tracks.items;
 
 	//console log list of attributes (artist, song name, url preview an album).
- 
- 	  for(var i = 0; i<getData.length; i++) {
+ 	  for(var i = 0; i<getSong.length; i++) {
 			console.log(i);
-			console.log('artist: ' + getData[i].artist);
-			console.log('song: ' + getData[i].name);
-			console.log('album: ' + getData[i].album.name);
-			console.log('preview: ' + getData[i].preview_url);
- 		};
-	})
-};
+			console.log('artist: ' + getSong[i].artist.map(artistName));
+			console.log('song: ' + getSong[i].name);
+			console.log('album: ' + getSong[i].album.name);
+			console.log('preview: ' + getSong[i].preview_url);
+			console.log('\n================================');
+ 		}
+	
+})
 
-mySong();
+var pick = function (caseData, functionData) {
+	switch(caseData) {
+		case 'Spotify-this-song':
+		mySong(functionData);
+		break;
+		default:
+		console.log('Title: ' .songName + 'The Sign');
+	}
+}
+var runArg = function(argOne, argTwo)	{
+	pick(argOne, argTwo);
+};
+runArg(process.argv[2], process.argv[3]);
+//mySong(process.argv[2]);
+
+// Spotify code above
+};
