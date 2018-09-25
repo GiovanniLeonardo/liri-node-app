@@ -1,4 +1,1 @@
-console.log('Sriracha goes great on nothing')
-
-
-
+console.log('Sriracha goes great on nothing');

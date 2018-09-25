@@ -1,13 +1,15 @@
 {
   "name": "liri-node-app",
   "version": "1.0.0",
-  "description": "ls",
-  "main": "index.js",
+  "description": "GTBootcamp",
+  "main": "liri.js",
   "dependencies": {
     "dotenv": "^6.0.0",
     "moment": "^2.22.2",
+    "movie": "^1.0.1",
     "node-spotify-api": "^1.0.7",
     "request": "^2.88.0",
+    "require": "^2.4.20",
     "spotify": "^0.3.0",
     "twitter": "^1.7.1"
   },
